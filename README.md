@@ -5,7 +5,7 @@ This tutorial describes how to 1) Prepare the necessary packages for code compil
 
 # Author
 
-All the credit goes to Sina Nozarian, a talented PhD student at the time of writing. The author contributed to the creation and documentation of this GitHub library for future use in the group.
+All the credit goes to [Sina Nozarian](https://scholar.google.com/citations?user=xxgnX4EAAAAJ&hl=en), a PhD student at the time of writing. The author only contributed to the creation and documentation of this GitHub library for future use in the Fluid Mechanics and Turbulence research group.
 
 # Target platform
 The procedure has been rigorously tested and verified to be fully compatible with OpenFOAM v-2112 and v-2312, ensuring its smooth integration and reliable performance with this specific release.
