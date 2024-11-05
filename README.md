@@ -44,7 +44,7 @@ The procedure has been rigorously tested and verified to be fully compatible wit
 #### 7. Check if OpenFOAM works by executing solver names and utilities. If not known, you may consider compiling them again.
 
 # Structure bash script
-Here is an example of a "run" bash script you can use to run the code (Notice the use of "mpiexec" for running the code).
+Here is a simple example of a "run" bash script you can use to run the code (Notice the use of "mpiexec" for running the code).
 
 ```
 #!/bin/bash
@@ -63,10 +63,8 @@ export I_MPI_OFI_PROVIDER=verbs
 source ~/OF/OpenFOAM-v2112/etc/bashrc
 
 cp -R 0.orig 0
-touch foam.foam
+touch sim.foam
 blockMesh
-checkMesh
-topoSet
 decomposePar -force 
 mpiexec -n $SLURM_NTASKS simpleFoam -parallel 
 ```
