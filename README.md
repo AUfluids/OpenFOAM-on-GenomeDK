@@ -1,15 +1,14 @@
 # OpenFOAM-on-Genome
 
-[![Paper: Author](https://img.shields.io/badge/Author-green.svg)](https://sites.google.com/view/zehtabiyan/home)
-
 # Description
-This tutorial describes how to 1) Prepare the necessary packages for code compilation, 2) Install the Intel HPC Toolkit , and 3) Install OpenFOAM. It will also touch on how to structure a "run" bash script.
+This tutorial describes how to 1) Prepare the necessary packages for code compilation, 2) Install the Intel HPC Toolkit, and 3) Install OpenFOAM. It will also touch on how to structure a "run" bash script.
+
+# Author
+
+All the credit goes to Sina Nozarian, a talented PhD student at the time of writing. The author contributed to the creation and documentation of this GitHub library for future use in the group.
 
 # Target platform
 The procedure has been rigorously tested and verified to be fully compatible with OpenFOAM v-2112 and v-2312, ensuring its smooth integration and reliable performance with this specific release.
-
-# Author
-[Navid Zehtabiyan-Rezaie](https://sites.google.com/view/zehtabiyan/home)
 
 # Prepare the necessary packages for code compilation 
 
@@ -55,18 +54,14 @@ Here is an example of a "run" bash script you can use to run the code (Notice th
 #SBATCH --mincpus=32
 #SBATCH --time=120:00:00
 #SBATCH --mem=10gb  
-#SBATCH --account=DeiC-AU-N2-2023009
+#SBATCH --account=DeiC-AU-XX-XXXXXXX
 #SBATCH -p normal
 ##SBATCH --nodes=1
 
-source /home/nzr/intel/oneapi/setvars.sh --force
+source /home/User/intel/oneapi/setvars.sh --force
 export I_MPI_OFI_PROVIDER=verbs
 source ~/OF/OpenFOAM-v2112/etc/bashrc
 
-
-rm -rf constant/extendedFeatureEdgeMesh > /dev/null 2>&1
-rm -f constant/triSurface/rotatingZone.eMesh > /dev/null 2>&1
-rm -f constant/triSurface/fixed.eMesh > /dev/null 2>&1
 cp -R 0.orig 0
 touch foam.foam
 blockMesh
@@ -74,15 +69,4 @@ checkMesh
 topoSet
 decomposePar -force 
 mpiexec -n $SLURM_NTASKS simpleFoam -parallel 
-reconstructPar -latestTime
-
-postProcess -func linesample -latestTime
-mv log.postProcess log.postProcesslineSample
-postProcess -funcs '(writeCellCentres)'
-mv log.postProcess log.postProcesswriteCellCentres
-postProcess -func surfaces -latestTime
-mv log.postProcess log.postProcesssurfaces
-foamToVTK -cellSet actuationDisk1CellSet
-
-rm -r process*
 ```
