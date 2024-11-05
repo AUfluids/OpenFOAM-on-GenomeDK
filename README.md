@@ -56,7 +56,6 @@ Here is a simple example of a "run" bash script you can use to run the code (Not
 #SBATCH --mem=10gb  
 #SBATCH --account=DeiC-AU-XX-XXXXXXX
 #SBATCH -p normal
-##SBATCH --nodes=1
 
 source /home/User/intel/oneapi/setvars.sh --force
 export I_MPI_OFI_PROVIDER=verbs
